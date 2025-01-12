@@ -514,7 +514,7 @@ class LSPMultiplexer:
         cleanup_tasks = [server.cleanup() for server in self.servers]
         await asyncio.gather(*cleanup_tasks)
 
-async def main() -> None:
+async def _main() -> None:
     parser = argparse.ArgumentParser(description='LSP Multiplexer')
     parser.add_argument('--stdio', action='store_true', help='Use stdio instead of TCP')
     parser.add_argument('--host', default='127.0.0.1', help='Host to listen on (default: 127.0.0.1)')
@@ -580,5 +580,9 @@ async def main() -> None:
     finally:
         await multiplexer.cleanup()
 
-if __name__ == "__main__":
+
+def main():
     asyncio.run(main())
+
+if __name__ == "__main__":
+    main()
